@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/pjmp/lsgo/cli"
 
@@ -30,9 +31,21 @@ func main() {
 	for _, d := range contents {
 		s := d.Size()
 
+		if app.Options.All == false {
+			if strings.HasPrefix(d.Name(), ".") {
+				continue
+			}
+		}
+
 		if app.Options.Recursive {
 			if d.IsDir() {
 				filepath.Walk(filepath.Join(app.Path, d.Name()), func(path string, info os.FileInfo, err error) error {
+
+					if app.Options.All == false {
+						if strings.HasPrefix(info.Name(), ".") {
+							return nil
+						}
+					}
 
 					if err != nil {
 						return err

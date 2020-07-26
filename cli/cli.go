@@ -18,6 +18,7 @@ type flagOpts struct {
 	Order     string `short:"o" long:"order"  default:"desc" choice:"asc" choice:"desc" description:"sort order"`
 	By        string `short:"b" long:"by" default:"n" choice:"n" choice:"s" choice:"t" choice:"x" description:"sort by: name (n), size (s), time (t), extension (x)"`
 	Recursive bool   `short:"R" long:"recursive" description:"print total size of subdirectories recursively"`
+	All       bool   `short:"a" long:"all" description:"display hidden files and folders"`
 }
 
 func New() CliOptions {
